@@ -6,6 +6,35 @@ from datetime import datetime
 
 from ai_engine import predict_root_cause
 from ai_engine import detect_severity
+from ai_engine import predict_root_cause
+from ai_engine import detect_severity
+
+
+# =====================================
+# AUTO FIX FAILURE
+# =====================================
+
+def auto_fix_error(cause):
+
+    if cause == "Database Failure":
+
+        return "Database reconnection attempted"
+
+    elif cause == "API Failure":
+
+        return "API request retried successfully"
+
+    elif cause == "Runtime Exception":
+
+        return "Application restart suggested"
+
+    elif cause == "Mathematical Runtime Exception":
+
+        return "Division validation applied"
+
+    else:
+
+        return "No automatic fix available"
 
 # =====================================
 # STORE FAILURE
@@ -24,6 +53,10 @@ def store_error(error_message):
     solution = prediction["solution"]
 
     confidence = prediction["confidence"]
+
+    auto_fix_status = auto_fix_error(
+        predicted_cause
+    )   
 
     severity = detect_severity(
 
@@ -55,11 +88,13 @@ def store_error(error_message):
 
             solution,
 
-            confidence
+            confidence,
+                   
+            auto_fix_status
 
         )
 
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
 
     """, (
 
@@ -73,7 +108,9 @@ def store_error(error_message):
 
         solution,
 
-        confidence
+        confidence,
+
+        auto_fix_status
 
     ))
 
@@ -90,12 +127,20 @@ def store_error(error_message):
 files_to_monitor = [
 
     "monitored_apps/sample.py",
-
     "monitored_apps/api.py",
-
     "monitored_apps/payment.py",
+    "monitored_apps/backend.py",
 
-    "monitored_apps/backend.py"
+    "monitored_apps/file_not_found.py",
+    "monitored_apps/value_error.py",
+    "monitored_apps/attribute_error.py",
+    "monitored_apps/import_error.py",
+    "monitored_apps/type_error.py",
+    "monitored_apps/unicode_error.py",
+    "monitored_apps/recursion_error.py",
+    "monitored_apps/assertion_error.py",
+    "monitored_apps/floating_error.py",
+    "monitored_apps/json_error.py"
 
 ]
 

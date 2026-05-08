@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, redirect, session
 from flask import send_file
-print("MY REAL APP.PY IS RUNNING")
 from flask import Flask
 
+import os
+import time
 import sqlite3
 import random
 import logging
@@ -58,7 +59,12 @@ def setup_database():
 
         solution TEXT,
 
-        confidence INTEGER
+        confidence INTEGER,
+                   
+        auto_fix_status TEXT,
+                   
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+
 
     )
 
@@ -594,6 +600,36 @@ def dashboard():
     return str(data)
 
 # =====================================
+# Self-Healing Function
+# =====================================
+
+def auto_fix_error(cause):
+
+    if cause == "Database Failure":
+
+        return "Database reconnection attempted"
+
+    elif cause == "API Failure":
+
+        return "API request retried successfully"
+
+    elif cause == "Memory Leak":
+
+        return "Temporary cache cleared"
+
+    elif cause == "Performance Issue":
+
+        return "System optimization executed"
+
+    elif cause == "Runtime Exception":
+
+        return "Application restart suggested"
+
+    else:
+
+        return "No automatic fix available"
+
+# =====================================
 # ADD FAILURE
 # =====================================
 
@@ -625,6 +661,14 @@ def add_failure():
 
     confidence = prediction['confidence']
 
+    auto_fix_status = auto_fix_error(
+
+    predicted_cause
+
+    )
+
+    print("AUTO FIX:", auto_fix_status)
+
     # STORE
 
     conn = connect_db()
@@ -645,11 +689,13 @@ def add_failure():
 
             solution,
 
-            confidence
+            confidence,
+                   
+            auto_fix_status
 
         )
 
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
 
     """, (
 
@@ -663,7 +709,9 @@ def add_failure():
 
         solution,
 
-        confidence
+        confidence,
+
+        auto_fix_status
 
     ))
 

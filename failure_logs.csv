@@ -5076,3 +5076,879 @@ requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-ap
           ~~~~~~~^^^^
 IndexError: list index out of range
 ",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+190,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+191,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+192,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+193,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+194,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+195,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+196,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+197,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+198,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+199,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+200,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+201,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+202,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+203,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+204,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+205,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+206,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+207,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+208,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+209,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+210,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+211,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+212,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+213,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+214,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+215,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+216,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+217,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+218,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+219,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
+220,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\sample.py"", line 4, in <module>
+    print(x / y)
+          ~~^~~
+ZeroDivisionError: division by zero
+",Python Runtime,MEDIUM,Mathematical Runtime Exception,Check denominator before division,92
+221,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\api.py"", line 3, in <module>
+    print(data[""name""])
+          ~~~~^^^^^^^^
+KeyError: 'name'
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+222,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\connection.py"", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\socket.py"", line 983, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1333, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1093, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\http\client.py"", line 1037, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connection.py"", line 211, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 645, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\connectionpool.py"", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\urllib3\util\retry.py"", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\payment.py"", line 3, in <module>
+    requests.get(""http://invalid-payment-api.com"")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 73, in get
+    return request(""get"", url, params=params, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\api.py"", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 592, in request
+    resp = self.send(prep, **send_kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\sessions.py"", line 706, in send
+    r = adapter.send(request, **kwargs)
+  File ""C:\Users\J SRIHARI\AppData\Local\Programs\Python\Python314\Lib\site-packages\requests\adapters.py"", line 678, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='invalid-payment-api.com', port=80): Max retries exceeded with url: / (Caused by NameResolutionError(""HTTPConnection(host='invalid-payment-api.com', port=80): Failed to resolve 'invalid-payment-api.com' ([Errno 11001] getaddrinfo failed)""))
+",Python Runtime,LOW,API Failure,Check API endpoint and authentication,90
+223,"Traceback (most recent call last):
+  File ""C:\Users\J SRIHARI\failure-driven-learning-model\monitored_apps\backend.py"", line 3, in <module>
+    print(numbers[11])
+          ~~~~~~~^^^^
+IndexError: list index out of range
+",Python Runtime,LOW,Runtime Exception,Check application logic and traceback,70
