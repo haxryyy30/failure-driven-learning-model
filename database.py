@@ -57,3 +57,5 @@ def create_table():
     conn.commit()
 
     conn.close()
+
+    # some comments
