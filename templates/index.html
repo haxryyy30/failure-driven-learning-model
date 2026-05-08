@@ -1199,35 +1199,48 @@
 
 <script>
 
-    let typingTimer;
+    let pauseRefresh = false;
 
-    let isTyping = false;
+    // SEARCH FORM
+    const searchForm = document.querySelector(
+        'form[method="GET"]'
+    );
 
-    document.querySelectorAll(
+    // ADD FAILURE FORM
+    const addForm = document.querySelector(
+        'form[action="/add_failure"]'
+    );
 
-        'input, textarea, select'
+    // Pause refresh while interacting
+    searchForm.addEventListener('mouseenter', () => {
 
-    ).forEach(element => {
-
-        element.addEventListener('input', () => {
-
-            isTyping = true;
-
-            clearTimeout(typingTimer);
-
-            typingTimer = setTimeout(() => {
-
-                isTyping = false;
-
-            }, 5000);
-
-        });
+        pauseRefresh = true;
 
     });
 
+    addForm.addEventListener('mouseenter', () => {
+
+        pauseRefresh = true;
+
+    });
+
+    // Resume refresh after leaving form
+    searchForm.addEventListener('mouseleave', () => {
+
+        pauseRefresh = false;
+
+    });
+
+    addForm.addEventListener('mouseleave', () => {
+
+        pauseRefresh = false;
+
+    });
+
+    // Auto refresh every 5 seconds
     setInterval(() => {
 
-        if (!isTyping) {
+        if (!pauseRefresh) {
 
             location.reload();
 
@@ -1236,7 +1249,6 @@
     }, 5000);
 
 </script>
-
 
 </body>
 
