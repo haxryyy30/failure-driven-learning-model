@@ -1,0 +1,18 @@
+error_message,cause
+Database Connection Failed,Database Failure
+Database Timeout Error,Database Failure
+SQL Connection Refused,Database Failure
+Null Pointer Exception,Null Error
+Object Reference Missing,Null Error
+Memory Leak Detected,Memory Leak
+RAM Overflow Error,Memory Leak
+Timeout Error,Network Timeout
+API Request Timeout,Network Timeout
+Socket Timeout Exception,Network Timeout
+CPU Usage Exceeded,Performance Issue
+High CPU Temperature,Performance Issue
+Disk Space Full,Storage Issue
+Authentication Failed,Security Issue
+Unauthorized Access Attempt,Security Issue
+Server Crash Detected,System Crash
+Kernel Failure,System Crash

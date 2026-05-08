@@ -1,0 +1,3 @@
+data = {}
+
+print(data["name"])

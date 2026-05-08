@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FDL Monitor Login</title>
+
+    <!-- Bootstrap -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            font-family:Arial, Helvetica, sans-serif;
+
+            height:100vh;
+
+            background:
+            linear-gradient(
+                135deg,
+                #0f172a,
+                #111827,
+                #1e293b
+            );
+
+            display:flex;
+
+            justify-content:center;
+
+            align-items:center;
+
+            overflow:hidden;
+        }
+
+        /* Glow */
+
+        .glow1{
+
+            position:absolute;
+
+            width:500px;
+
+            height:500px;
+
+            background:rgba(37,99,235,0.25);
+
+            filter:blur(120px);
+
+            border-radius:50%;
+
+            top:-120px;
+
+            left:-120px;
+        }
+
+        .glow2{
+
+            position:absolute;
+
+            width:500px;
+
+            height:500px;
+
+            background:rgba(5,150,105,0.2);
+
+            filter:blur(120px);
+
+            border-radius:50%;
+
+            bottom:-120px;
+
+            right:-120px;
+        }
+
+        /* Main Container */
+
+        .auth-container{
+
+            width:1100px;
+
+            height:650px;
+
+            background:rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(18px);
+
+            border-radius:25px;
+
+            overflow:hidden;
+
+            display:flex;
+
+            box-shadow:0 10px 40px rgba(0,0,0,0.4);
+
+            position:relative;
+
+            z-index:1;
+        }
+
+        /* Left */
+
+        .left-panel{
+
+            width:45%;
+
+            background:
+            linear-gradient(
+                135deg,
+                #2563eb,
+                #1d4ed8
+            );
+
+            color:white;
+
+            padding:60px;
+
+            display:flex;
+
+            flex-direction:column;
+
+            justify-content:center;
+        }
+
+        .left-panel h1{
+
+            font-size:52px;
+
+            margin-bottom:20px;
+
+            font-weight:bold;
+        }
+
+        .left-panel p{
+
+            font-size:18px;
+
+            line-height:1.8;
+
+            opacity:0.9;
+        }
+
+        .feature-list{
+
+            margin-top:40px;
+        }
+
+        .feature{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:15px;
+
+            margin-bottom:20px;
+
+            font-size:17px;
+        }
+
+        .feature i{
+
+            font-size:24px;
+        }
+
+        /* Right */
+
+        .right-panel{
+
+            width:55%;
+
+            background:white;
+
+            padding:50px;
+
+            overflow-y:auto;
+        }
+
+        /* Tabs */
+
+        .tabs{
+
+            display:flex;
+
+            margin-bottom:30px;
+
+            border-radius:12px;
+
+            overflow:hidden;
+
+            border:1px solid #d1d5db;
+        }
+
+        .tab-btn{
+
+            width:50%;
+
+            padding:15px;
+
+            border:none;
+
+            background:#f3f4f6;
+
+            font-weight:bold;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        .tab-btn.active{
+
+            background:#2563eb;
+
+            color:white;
+        }
+
+        /* Forms */
+
+        .auth-form{
+
+            display:none;
+        }
+
+        .auth-form.active{
+
+            display:block;
+        }
+
+        .logo{
+
+            text-align:center;
+
+            margin-bottom:20px;
+        }
+
+        .logo i{
+
+            font-size:60px;
+
+            color:#2563eb;
+        }
+
+        h2{
+
+            text-align:center;
+
+            font-weight:bold;
+
+            margin-bottom:10px;
+
+            color:#111827;
+        }
+
+        .subtitle{
+
+            text-align:center;
+
+            color:gray;
+
+            margin-bottom:35px;
+        }
+
+        .form-control{
+
+            height:55px;
+
+            border-radius:12px;
+
+            margin-bottom:20px;
+
+            padding-left:15px;
+        }
+
+        .form-control:focus{
+
+            box-shadow:none;
+
+            border-color:#2563eb;
+        }
+
+        .auth-btn{
+
+            height:55px;
+
+            border:none;
+
+            border-radius:12px;
+
+            background:#2563eb;
+
+            color:white;
+
+            font-size:16px;
+
+            font-weight:bold;
+
+            transition:0.3s;
+        }
+
+        .auth-btn:hover{
+
+            background:#1d4ed8;
+        }
+
+        .footer-text{
+
+            text-align:center;
+
+            margin-top:25px;
+
+            color:gray;
+
+            font-size:14px;
+        }
+
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="glow1"></div>
+
+    <div class="glow2"></div>
+
+    <div class="auth-container">
+
+        <!-- LEFT -->
+
+        <div class="left-panel">
+
+            <h1>FDL Monitor</h1>
+
+            <p>
+
+                AI-powered self-improving software monitoring platform
+                designed to detect, analyze, predict, and resolve
+                runtime failures intelligently.
+
+            </p>
+
+            <div class="feature-list">
+
+                <div class="feature">
+
+                    <i class="fa-solid fa-brain"></i>
+
+                    <span>AI Root Cause Analysis</span>
+
+                </div>
+
+                <div class="feature">
+
+                    <i class="fa-solid fa-chart-line"></i>
+
+                    <span>Real-Time Failure Analytics</span>
+
+                </div>
+
+                <div class="feature">
+
+                    <i class="fa-solid fa-robot"></i>
+
+                    <span>Automated Solution Suggestions</span>
+
+                </div>
+
+                <div class="feature">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <span>Secure Monitoring Dashboard</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="right-panel">
+
+            <!-- Tabs -->
+
+            <div class="tabs">
+
+                <button class="tab-btn active"
+                        onclick="showTab('login')">
+
+                    Login
+
+                </button>
+
+                <button class="tab-btn"
+                        onclick="showTab('register')">
+
+                    Register
+
+                </button>
+
+            </div>
+
+            <!-- LOGIN -->
+
+            <div id="login"
+                 class="auth-form active">
+
+                <div class="logo">
+
+                    <i class="fa-solid fa-right-to-bracket"></i>
+
+                </div>
+
+                <h2>Welcome Back</h2>
+
+                <p class="subtitle">
+
+                    Login to continue to FDL Monitor
+
+                </p>
+
+                {% if error %}
+
+                    <div class="alert alert-danger">
+
+                        {{ error }}
+
+                    </div>
+
+                {% endif %}
+
+                <form method="POST"
+                      action="/login">
+
+                    <input
+                        type="text"
+                        name="username"
+                        class="form-control"
+                        placeholder="Enter Username"
+                        required>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter Password"
+                        required>
+
+                    <button type="submit"
+                            class="btn auth-btn w-100">
+
+                        Login to Dashboard
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- REGISTER -->
+
+            <div id="register"
+                 class="auth-form">
+
+                <div class="logo">
+
+                    <i class="fa-solid fa-user-plus"></i>
+
+                </div>
+
+                <h2>Create Account</h2>
+
+                <p class="subtitle">
+
+                    Register New User
+
+                </p>
+
+                <form method="POST"
+                      action="/register">
+
+                    <input
+                        type="text"
+                        name="username"
+                        class="form-control"
+                        placeholder="Enter Username"
+                        required>
+
+                    <input
+                        type="password"
+                        name="password"
+                        class="form-control"
+                        placeholder="Enter Password"
+                        required>
+
+                    <button type="submit"
+                            class="btn auth-btn w-100">
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            <div class="footer-text">
+
+                FDL Monitor v1.0 • AI Failure Learning Platform
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function showTab(tabName){
+
+            const forms = document.querySelectorAll('.auth-form');
+
+            forms.forEach(form => {
+
+                form.classList.remove('active');
+
+            });
+
+            document
+                .getElementById(tabName)
+                .classList.add('active');
+
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            buttons.forEach(btn => {
+
+                btn.classList.remove('active');
+
+            });
+
+            if(tabName === 'login'){
+
+                buttons[0].classList.add('active');
+
+            }
+
+            else{
+
+                buttons[1].classList.add('active');
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

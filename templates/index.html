@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>FDL Monitor Dashboard</title>
+
+    <!-- Chart JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+
+            background:#eef2f7;
+
+            display:flex;
+
+            color:#111827;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar{
+
+            width:270px;
+
+            height:100vh;
+
+            background:
+            linear-gradient(
+                180deg,
+                #0f172a,
+                #111827
+            );
+
+            color:white;
+
+            position:fixed;
+
+            left:0;
+
+            top:0;
+
+            padding:30px 20px;
+
+            overflow-y:auto;
+
+            box-shadow:5px 0 20px rgba(0,0,0,0.1);
+        }
+
+        .sidebar h2{
+
+            font-size:34px;
+
+            margin-bottom:45px;
+
+            text-align:center;
+        }
+
+        .sidebar a{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:15px;
+
+            text-decoration:none;
+
+            color:white;
+
+            padding:16px 18px;
+
+            border-radius:15px;
+
+            margin-bottom:15px;
+
+            transition:0.3s;
+
+            font-size:17px;
+        }
+
+        .sidebar a:hover{
+
+            background:#1e293b;
+
+            transform:translateX(5px);
+        }
+
+        .sidebar i{
+
+            font-size:18px;
+        }
+
+        /* MAIN */
+
+        .main{
+
+            margin-left:290px;
+
+            width:calc(100% - 290px);
+
+            padding:30px;
+        }
+
+        .top-bar{
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            margin-bottom:30px;
+        }
+
+        .top-bar h1{
+
+            font-size:55px;
+
+            font-weight:bold;
+        }
+
+        .profile{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:15px;
+        }
+
+        .profile img{
+
+            width:55px;
+
+            height:55px;
+
+            border-radius:50%;
+        }
+
+        /* BOX */
+
+        .box{
+
+            background:white;
+
+            border-radius:28px;
+
+            padding:30px;
+
+            margin-bottom:30px;
+
+            box-shadow:0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .box h2{
+
+            margin-bottom:25px;
+
+            font-size:28px;
+
+            font-weight:700;
+
+            color:#0f172a;
+        }
+        .section-title{
+
+        font-size:56px;
+
+        font-weight:800;
+
+        color:#0f172a;
+
+        margin-bottom:30px;
+
+        letter-spacing:-1px;
+}
+
+        /* FORMS */
+
+        form{
+
+            display:grid;
+
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+            gap:20px;
+        }
+
+        input,
+        select{
+
+            padding:18px;
+
+            border-radius:16px;
+
+            border:1px solid #d1d5db;
+
+            font-size:17px;
+
+            outline:none;
+
+            transition:0.3s;
+        }
+
+        input:focus,
+        select:focus{
+
+            border-color:#2563eb;
+
+            box-shadow:0 0 0 4px rgba(37,99,235,0.15);
+        }
+
+        button{
+
+            border:none;
+
+            border-radius:16px;
+
+            background:#0f172a;
+
+            color:white;
+
+            font-size:18px;
+
+            cursor:pointer;
+
+            transition:0.3s;
+        }
+
+        button:hover{
+
+            background:#1e293b;
+
+            transform:translateY(-2px);
+        }
+
+        /* STATS */
+
+        .stats{
+
+            display:grid;
+
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+            gap:25px;
+
+            margin-bottom:30px;
+        }
+
+        .card{
+
+            color:white;
+
+            padding:35px;
+
+            border-radius:25px;
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        .card::before{
+
+            content:'';
+
+            position:absolute;
+
+            width:200px;
+
+            height:200px;
+
+            background:rgba(255,255,255,0.08);
+
+            border-radius:50%;
+
+            top:-60px;
+
+            right:-60px;
+        }
+
+        .card h3{
+
+            font-size:60px;
+
+            margin-bottom:10px;
+        }
+
+        .card p{
+
+            font-size:22px;
+        }
+
+        .blue{
+
+            background:#2563eb;
+        }
+
+        .red{
+
+            background:#dc2626;
+        }
+
+        .orange{
+
+            background:#f59e0b;
+        }
+
+        .green{
+
+            background:#16a34a;
+        }
+
+        /* CHARTS */
+
+        .charts{
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:25px;
+
+            margin-bottom:30px;
+        }
+
+        .chart-box{
+
+            background:white;
+
+            padding:25px;
+
+            border-radius:28px;
+
+            height:450px;
+
+            box-shadow:0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        canvas{
+
+            width:100% !important;
+
+            height:320px !important;
+        }
+
+        /* TABLES */
+
+        .table-container{
+
+            overflow-x:auto;
+        }
+
+        table{
+
+            width:100%;
+
+            border-collapse:collapse;
+
+            margin-top:20px;
+        }
+
+        th{
+
+            background:#0f172a;
+
+            color:white;
+
+            padding:18px;
+
+            text-align:left;
+
+            font-size:17px;
+        }
+
+        td{
+
+            padding:18px;
+
+            border-bottom:1px solid #e5e7eb;
+
+            vertical-align:top;
+
+            line-height:1.7;
+        }
+
+        tr:hover{
+
+            background:#f9fafb;
+        }
+
+        .error-cell{
+
+            max-width:420px;
+
+            word-break:break-word;
+        }
+
+        /* BADGES */
+
+        .badge{
+
+            padding:8px 14px;
+
+            border-radius:12px;
+
+            color:white;
+
+            font-size:14px;
+
+            font-weight:bold;
+        }
+
+        .HIGH{
+
+            background:#dc2626;
+        }
+
+        .MEDIUM{
+
+            background:#f59e0b;
+        }
+
+        .LOW{
+
+            background:#16a34a;
+        }
+
+        /* ALERT */
+
+        .alert{
+
+            background:#fee2e2;
+
+            color:#991b1b;
+
+            padding:18px;
+
+            border-radius:18px;
+
+            margin-bottom:15px;
+
+            font-size:17px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:1100px){
+
+            .charts{
+
+                grid-template-columns:1fr;
+            }
+        }
+
+        @media(max-width:900px){
+
+            .sidebar{
+
+                display:none;
+            }
+
+            .main{
+
+                margin-left:0;
+
+                width:100%;
+            }
+
+            .top-bar{
+
+                flex-direction:column;
+
+                align-items:flex-start;
+
+                gap:20px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>FDL Monitor</h2>
+
+        <a href="/">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            Dashboard
+
+        </a>
+
+        <a href="/failures">
+
+            <i class="fa-solid fa-bug"></i>
+
+            Failures
+
+        </a>
+
+        <a href="/predictions">
+
+            <i class="fa-solid fa-brain"></i>
+
+            Predictions
+
+        </a>
+
+        <a href="/knowledge">
+
+            <i class="fa-solid fa-book"></i>
+
+            Knowledge Base
+
+        </a>
+
+        <a href="/settings">
+
+            <i class="fa-solid fa-gear"></i>
+
+            Settings
+
+        </a>
+
+        <a href="/logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+    <!-- MAIN -->
+
+    <div class="main">
+
+        <!-- TOP -->
+
+        <div class="top-bar">
+
+            <h1>Failure-Driven Learning Dashboard</h1>
+
+
+        </div>
+
+        <!-- ALERTS -->
+
+        {% for alert in alerts %}
+
+        <div class="alert">
+
+            {{ alert }}
+
+        </div>
+
+        {% endfor %}
+
+        <!-- SEARCH -->
+
+        <div class="box">
+
+            <h2>Search & Filter Failures</h2>
+
+            <form method="GET">
+
+                <select name="module">
+
+                    <option value="">All Modules</option>
+
+                    <option value="Python Runtime">Python Runtime</option>
+
+                    <option value="Database Module">Database Module</option>
+
+                    <option value="API Module">API Module</option>
+
+                    <option value="Frontend">Frontend</option>
+
+                    <option value="Python Runtime">Python Runtime</option>
+                
+                    <option value="Database Module">Database Module</option>
+                
+                    <option value="API Module">API Module</option>
+                
+                    <option value="Frontend">Frontend</option>
+                
+                    <option value="Backend">Backend</option>
+                
+                    <option value="Authentication">Authentication</option>
+                
+                    <option value="Payment Gateway">Payment Gateway</option>
+                
+                    <option value="Cloud Service">Cloud Service</option>
+                
+                    <option value="Machine Learning">Machine Learning</option>
+                
+                    <option value="Notification System">Notification System</option>
+                
+                    <option value="Logging Service">Logging Service</option>
+                
+                    <option value="Analytics Engine">Analytics Engine</option>
+                
+                    <option value="Security Layer">Security Layer</option>
+                
+                    <option value="Cache Manager"> Cache Manager</option>
+                
+                    <option value="User Management">User Management</option>
+
+                </select>
+
+                <select name="severity">
+
+                    <option value="">All Severity</option>
+
+                    <option value="HIGH">HIGH</option>
+
+                    <option value="MEDIUM">MEDIUM</option>
+
+                    <option value="LOW">LOW</option>
+
+                </select>
+
+                <select
+    name="search"
+    class="modern-select"
+>
+
+    <option value="">Search Error</option>
+
+    <option value="Database connection failed">
+        Database connection failed
+    </option>
+
+    <option value="API timeout error">
+        API timeout error
+    </option>
+
+    <option value="IndexError: list index out of range">
+        IndexError: list index out of range
+    </option>
+
+    <option value="ZeroDivisionError">
+        ZeroDivisionError
+    </option>
+
+    <option value="Authentication token expired">
+        Authentication token expired
+    </option>
+
+    <option value="Frontend rendering failed">
+        Frontend rendering failed
+    </option>
+
+    <option value="Payment gateway error">
+        Payment gateway error
+    </option>
+
+    <option value="SQL syntax error">
+        SQL syntax error
+    </option>
+
+    <option value="Network unreachable">
+        Network unreachable
+    </option>
+
+    <option value="Memory overflow detected">
+        Memory overflow detected
+    </option>
+
+    <option value="File not found exception">
+        File not found exception
+    </option>
+
+    <option value="Module import failed">
+        Module import failed
+    </option>
+
+    <option value="Permission denied">
+        Permission denied
+    </option>
+
+    <option value="Null pointer exception">
+        Null pointer exception
+    </option>
+
+    <option value="Server internal error">
+        Server internal error
+    </option>
+
+</select>
+
+                <button type="submit">
+
+                    Search
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- ADD FAILURE -->
+
+        <div class="box">
+
+            <h2>Add New Failure</h2>
+
+            <form method="POST"
+                  action="/add_failure">
+
+            <select
+                  name="error_message"
+                  class="modern-select"
+                  required
+            >
+              
+                  <option value="">Select Error Message</option>
+              
+                  <option>Database connection failed</option>
+              
+                  <option>API timeout error</option>
+              
+                  <option>IndexError: list index out of range</option>
+              
+                  <option>ZeroDivisionError</option>
+              
+                  <option>Authentication token expired</option>
+              
+                  <option>Frontend rendering failed</option>
+              
+                  <option>Payment gateway error</option>
+              
+                  <option>SQL syntax error</option>
+              
+                  <option>Network unreachable</option>
+              
+                  <option>Memory overflow detected</option>
+              
+                  <option>File not found exception</option>
+              
+                  <option>Module import failed</option>
+              
+                  <option>Permission denied</option>
+              
+                  <option>Null pointer exception</option>
+              
+                  <option>Server internal error</option>
+              
+              </select>
+
+              <select
+              name="module_name"
+              class="modern-select"
+              required
+          >
+          
+              <option value="">Select Module</option>
+          
+              <option>Python Runtime</option>
+          
+              <option>Database Module</option>
+          
+              <option>API Module</option>
+          
+              <option>Frontend</option>
+          
+              <option>Backend</option>
+          
+              <option>Authentication</option>
+          
+              <option>Payment Gateway</option>
+          
+              <option>Cloud Service</option>
+          
+              <option>Machine Learning</option>
+          
+              <option>Notification System</option>
+          
+              <option>Logging Service</option>
+          
+              <option>Analytics Engine</option>
+          
+              <option>Security Layer</option>
+          
+              <option>Cache Manager</option>
+          
+              <option>User Management</option>
+          
+          </select>
+
+                <select name="severity">
+
+                    <option value="All Severity">All Severity</option>
+
+                    <option value="HIGH">HIGH</option>
+
+                    <option value="MEDIUM">MEDIUM</option>
+
+                    <option value="LOW">LOW</option>
+
+                </select>
+
+                <button type="submit">
+
+                    Add Failure
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- STATS -->
+
+        <div class="stats">
+
+            <div class="card blue">
+
+                <h3>{{ total_failures }}</h3>
+
+                <p>Total Failures</p>
+
+            </div>
+
+            <div class="card red">
+
+                <h3>{{ high_count }}</h3>
+
+                <p>High Severity</p>
+
+            </div>
+
+            <div class="card orange">
+
+                <h3>{{ medium_count }}</h3>
+
+                <p>Medium Severity</p>
+
+            </div>
+
+            <div class="card green">
+
+                <h3>{{ low_count }}</h3>
+
+                <p>Low Severity</p>
+
+            </div>
+
+        </div>
+
+        <!-- CHARTS -->
+
+        <div class="charts">
+
+            <div class="chart-box">
+
+                <h2>Severity Distribution</h2>
+
+                <canvas id="severityChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Module Analytics</h2>
+
+                <canvas id="moduleChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>AI Confidence Growth</h2>
+
+                <canvas id="confidenceChart"></canvas>
+
+            </div>
+
+            <div class="chart-box">
+
+                <h2>Failure Trend</h2>
+
+                <canvas id="trendChart"></canvas>
+
+            </div>
+
+        </div>
+
+        <!-- TOP ERRORS -->
+
+        <div class="box">
+
+            <h2>Top Frequent Errors</h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <tr>
+
+                        <th>Error Message</th>
+
+                        <th>Frequency</th>
+
+                    </tr>
+
+                    {% for error in top_errors %}
+
+                    <tr>
+
+                        <td class="error-cell">
+
+                            {{ error[0][:100] }}...
+
+                        </td>
+
+                        <td>
+
+                            {{ error[1] }}
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- RECENT FAILURES -->
+
+        <div class="box">
+
+            <h2 class="section-title">
+                Recent Failures
+            </h2>
+
+            <div class="table-container">
+
+                <table>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Error Message</th>
+
+                        <th>Module</th>
+
+                        <th>Severity</th>
+
+                        <th>Predicted Cause</th>
+
+                        <th>Suggested Solution</th>
+
+                        <th>Confidence</th>
+
+                    </tr>
+
+                    {% for log in logs %}
+
+                    <tr>
+
+                        <td>{{ log[0] }}</td>
+
+                        <td class="error-cell">
+
+                            {{ log[1][:120] }}...
+
+                        </td>
+
+                        <td>{{ log[2] }}</td>
+
+                        <td>
+
+                            <span class="badge {{ log[3] }}">
+
+                                {{ log[3] }}
+
+                            </span>
+
+                        </td>
+
+                        <td>{{ log[4] }}</td>
+
+                        <td>{{ log[5] }}</td>
+
+                        <td>{{ log[6] }}%</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CHARTS -->
+
+    <script>
+
+        new Chart(
+
+            document.getElementById('severityChart'),
+
+            {
+
+                type:'bar',
+
+                data:{
+
+                    labels:['HIGH','MEDIUM','LOW'],
+
+                    datasets:[{
+
+                        label:'Severity Count',
+
+                        data:[
+                            {{ high_count }},
+                            {{ medium_count }},
+                            {{ low_count }}
+                        ],
+
+                        backgroundColor:[
+                            '#dc2626',
+                            '#f59e0b',
+                            '#16a34a'
+                        ],
+
+                        borderRadius:10
+                    }]
+                },
+
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false
+                }
+            }
+        );
+
+        new Chart(
+
+            document.getElementById('moduleChart'),
+
+            {
+
+                type:'bar',
+
+                data:{
+
+                    labels:{{ module_labels | tojson }},
+
+                    datasets:[{
+
+                        label:'Failures',
+
+                        data:{{ module_counts | tojson }},
+
+                        backgroundColor:'#2563eb',
+
+                        borderRadius:10
+                    }]
+                },
+
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false
+                }
+            }
+        );
+
+        new Chart(
+
+            document.getElementById('confidenceChart'),
+
+            {
+
+                type:'line',
+
+                data:{
+
+                    labels:{{ confidence_labels | tojson }},
+
+                    datasets:[{
+
+                        label:'Confidence %',
+
+                        data:{{ confidence_values | tojson }},
+
+                        borderColor:'#16a34a',
+
+                        backgroundColor:'rgba(22,163,74,0.1)',
+
+                        fill:true,
+
+                        tension:0.4
+                    }]
+                },
+
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false,
+
+                    scales:{
+                        y:{
+                            beginAtZero:true,
+                            max:100
+                        }
+                    }
+                }
+            }
+        );
+
+        new Chart(
+
+            document.getElementById('trendChart'),
+
+            {
+
+                type:'line',
+
+                data:{
+
+                    labels:[
+                        'Mon',
+                        'Tue',
+                        'Wed',
+                        'Thu',
+                        'Fri',
+                        'Sat',
+                        'Sun'
+                    ],
+
+                    datasets:[{
+
+                        label:'Failure Trend',
+
+                        data:[4,7,5,9,6,11,8],
+
+                        borderColor:'#2563eb',
+
+                        backgroundColor:'rgba(37,99,235,0.1)',
+
+                        fill:true,
+
+                        tension:0.4
+                    }]
+                },
+
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false
+                }
+            }
+        );
+
+    </script>
+
+
+
+</script>
+
+<script>
+
+    let typingTimer;
+
+    let isTyping = false;
+
+    document.querySelectorAll(
+
+        'input, textarea, select'
+
+    ).forEach(element => {
+
+        element.addEventListener('input', () => {
+
+            isTyping = true;
+
+            clearTimeout(typingTimer);
+
+            typingTimer = setTimeout(() => {
+
+                isTyping = false;
+
+            }, 5000);
+
+        });
+
+    });
+
+    setInterval(() => {
+
+        if (!isTyping) {
+
+            location.reload();
+
+        }
+
+    }, 5000);
+
+</script>
+
+
+</body>
+
+</html>
